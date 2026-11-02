@@ -84,6 +84,7 @@ The tool contract is in [docs/tools.md](docs/tools.md).
 npm install
 npm run check    # manifest and skills sanity checks
 npm run lint     # ESLint, Prettier and markdownlint
+npm run pack     # dist/nihmbus-popcraft-<version>.json, installable from a URL
 ```
 
 ```text
@@ -91,6 +92,8 @@ nihmbus.extension.json   the extension manifest: device tools and skills
 skills/<name>/SKILL.md   one self-contained skill per folder
 docs/tools.md            the tool contract the plugin implements
 scripts/check.mjs        sanity checks run in CI
+scripts/pack.mjs         builds the { manifest, skills } package the release attaches
+scripts/set-version.mjs  sets the version (used by the release)
 ```
 
 - The manifest format is documented in the
@@ -99,6 +102,9 @@ scripts/check.mjs        sanity checks run in CI
   `device.protocol` here and `EXTENSION_PROTOCOL` in the plugin, and release both together. The plugin's
   `scripts/contract-check.mjs` compares the two.
 - Skills are installed one `SKILL.md` per folder, so keep each one self-contained.
+- **Releases** are automatic from [Conventional Commits](https://www.conventionalcommits.org) with
+  [tishlang/sem](https://github.com/tishlang/sem): merging to `main` makes a prerelease with the package attached, and
+  promoting it makes it the latest. See [CONTRIBUTING.md](CONTRIBUTING.md).
 
 ## Related
 
