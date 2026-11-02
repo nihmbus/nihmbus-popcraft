@@ -1,59 +1,110 @@
 # PopCraft for Nihmbus
 
-A [Nihmbus](https://nihmbus.ai) extension that lets agents design graphics, motion and video in
-[PopCraft](https://popcraft.app): in **your own PopCraft editor**, on the web or in the desktop app.
+[![CI](https://github.com/nihmbus/nihmbus-popcraft/actions/workflows/ci.yml/badge.svg)](https://github.com/nihmbus/nihmbus-popcraft/actions/workflows/ci.yml)
+[![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
 
-```
-Nihmbus agent ──▶ Nihmbus ◀── long-poll ── Nihmbus plugin, running in your PopCraft editor
+Let your [Nihmbus](https://nihmbus.ai) agents design graphics, motion and video in [PopCraft](https://popcraft.app):
+in **your own PopCraft editor**, on the web or in the desktop app, signed in as you.
+
+This repo is the Nihmbus side of the connection: an extension that gives agents PopCraft tools, plus skills that
+teach them to use PopCraft well. The PopCraft side is the
+[Nihmbus plugin for PopCraft](https://github.com/getpopcraft/popcraft-plugin-nihmbus).
+
+## How it works
+
+```mermaid
+sequenceDiagram
+    participant A as Nihmbus agent
+    participant N as Nihmbus
+    participant P as PopCraft + Nihmbus plugin<br/>(your browser or desktop app)
+    P->>N: pair once with a one-time code
+    loop while the plugin runs
+        P->>N: anything for me? (long-poll)
+    end
+    A->>N: ext__popcraft__call { createNode … }
+    N-->>P: the command
+    P->>P: runs it with the PopCraft plugin API
+    P->>N: the result (exports go straight to file storage)
+    N-->>A: the result
 ```
 
-- **This repo** is the Nihmbus side: the extension manifest (the device tools the agent gets) and the skills that
-  teach agents how to use PopCraft well.
-- **[getpopcraft/popcraft-plugin-nihmbus](https://github.com/getpopcraft/popcraft-plugin-nihmbus)** is the PopCraft
-  side: a PopCraft plugin that connects to Nihmbus and runs the tools.
-- The relay between them (pairing, polling, uploads) is a general Nihmbus feature,
-  [extension devices](https://github.com/nihmbus/nihmbus/blob/main/docs/extension-devices.md). Nothing here is
-  built into Nihmbus or PopCraft.
+- **Nothing listens on your machine.** The plugin only makes outgoing requests to Nihmbus, so it works in a browser
+  tab and in the sandboxed App Store app.
+- **Your PopCraft is yours.** Only your own agent runs can use the editor you connected, and you can disconnect it
+  from either side at any time.
+- **Nothing is built into Nihmbus or PopCraft.** This extension uses Nihmbus's general
+  [extension devices](https://github.com/nihmbus/nihmbus/blob/main/docs/extension-devices.md) feature, and the
+  plugin uses PopCraft's public plugin API.
 
 ## What agents can do
 
-| Tool | |
-|---|---|
-| `ext__popcraft__status` | The open page, its layers, the selection |
-| `ext__popcraft__call` | Run PopCraft plugin API methods: build and edit layers, text, styles, components, keyframes, motion presets, compositions, prototypes… |
-| `ext__popcraft__export` | Export a layer as PNG, JPG, WEBP, SVG or PDF and get a URL |
+| Tool                    | What it does                                                                                                                                                                                                |
+| ----------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `ext__popcraft__status` | Show what's open: the current page, its layers and the selection.                                                                                                                                           |
+| `ext__popcraft__call`   | Run [PopCraft plugin API](https://popcraft.app/docs/plugins/api-reference) methods: layers, text, styles, components, keyframes, motion presets, compositions, prototypes… (95 methods, up to 50 per call). |
+| `ext__popcraft__export` | Export a layer as PNG, JPG, WEBP, SVG or PDF and return a link to the file.                                                                                                                                 |
 
-Skills: `popcraft` (setup, docs, connecting), `popcraft-graphics`, `popcraft-motion`, `popcraft-video`,
-`popcraft-social`.
+The tool contract is in [docs/tools.md](docs/tools.md).
 
-Not yet possible through the plugin: video export (MP4/GIF) and PopCraft's AI generation. The PopCraft plugin API
-doesn't offer them yet; the `popcraft-video` skill explains the workarounds. Agents with a shell on your machine can
-use the PopCraft CLI for those.
+### Skills
 
-## Set up
+| Skill               | For                                                                           |
+| ------------------- | ----------------------------------------------------------------------------- |
+| `popcraft`          | Setup, connecting, the latest docs, and which tools run where                 |
+| `popcraft-graphics` | Posters, social posts, banners, thumbnails                                    |
+| `popcraft-motion`   | Animated posts, kinetic type, logo reveals, promos                            |
+| `popcraft-video`    | MP4/GIF and short-form video sets                                             |
+| `popcraft-social`   | Whole social campaigns: assets in every size, post copy, approval, publishing |
 
-1. **Install the extension** in Nihmbus: **Extensions → Install from Git →** `nihmbus/nihmbus-popcraft`. Grant it
-   **device** access.
-2. **Install the plugin** in PopCraft: main menu → **Manage plugins…** → search **Nihmbus** → **Install** (or
-   **Install from file…** with a zip from the plugin's releases).
-3. **Connect:** in Nihmbus, **Extensions → PopCraft → Connect PopCraft** shows a code. In PopCraft, run
+## Get started
+
+1. **Install the extension in Nihmbus.** Open **Extensions → Install from Git**, enter `nihmbus/nihmbus-popcraft`,
+   and allow **device** access.
+2. **Install the plugin in PopCraft.** Open the main menu → **Manage plugins…**, search for **Nihmbus**, and install
+   it. Or download the `.json` from the
+   [plugin's releases](https://github.com/getpopcraft/popcraft-plugin-nihmbus/releases) and use **Installed → Install
+   from file…**.
+3. **Connect them.** In Nihmbus, open **Extensions → PopCraft → Connect PopCraft** to get a code. In PopCraft, run
    **Plugins → Nihmbus → Connect** and enter it.
-4. Keep the plugin running while agents work. Hiding its panel is fine; closing it or the PopCraft tab disconnects.
+4. **Ask an agent for something**, like "make a 1080×1350 launch poster for our new feature". Keep the plugin running
+   while it works. Hiding its panel is fine; closing it, or the PopCraft tab, disconnects.
 
-Your connected PopCraft is yours alone: only your own agent runs can use it, and you can disconnect it any time from
-either side.
+## Limitations
+
+- **No video export or AI generation through the plugin yet.** The PopCraft plugin API doesn't offer MP4/GIF export
+  or PopCraft's AI features. The `popcraft-video` skill has the agent build the animation and hand the final export
+  to you. Agents that have a shell on your machine can use the [PopCraft CLI](https://popcraft.app/docs/api/cli)
+  instead.
+- **The plugin must be running.** A PopCraft tab that is closed, reloaded or frozen by the browser goes offline until
+  you run **Connect** again; no new code is needed.
 
 ## Develop
 
 ```sh
-node scripts/check.mjs      # manifest + skills sanity checks
+npm install
+npm run check    # manifest and skills sanity checks
+npm run lint     # ESLint, Prettier and markdownlint
 ```
 
-- [`nihmbus.extension.json`](nihmbus.extension.json): the manifest. Format:
+```text
+nihmbus.extension.json   the extension manifest: device tools and skills
+skills/<name>/SKILL.md   one self-contained skill per folder
+docs/tools.md            the tool contract the plugin implements
+scripts/check.mjs        sanity checks run in CI
+```
+
+- The manifest format is documented in the
   [extension author guide](https://github.com/nihmbus/nihmbus/blob/main/docs/extensions.md).
-- [`docs/tools.md`](docs/tools.md): the tool contract the plugin implements. A change that breaks it bumps
-  `device.protocol` here and in the plugin, together.
-- [`skills/`](skills): one folder per skill, each a self-contained `SKILL.md`.
+- **Keep the contract in step with the plugin.** If a change breaks [docs/tools.md](docs/tools.md), bump
+  `device.protocol` here and `EXTENSION_PROTOCOL` in the plugin, and release both together. The plugin's
+  `scripts/contract-check.mjs` compares the two.
+- Skills are installed one `SKILL.md` per folder, so keep each one self-contained.
+
+## Related
+
+- [getpopcraft/popcraft-plugin-nihmbus](https://github.com/getpopcraft/popcraft-plugin-nihmbus): the PopCraft plugin.
+- [Extension devices](https://github.com/nihmbus/nihmbus/blob/main/docs/extension-devices.md): how Nihmbus connects to
+  apps on your device, and how to build your own connector.
 
 ## License
 

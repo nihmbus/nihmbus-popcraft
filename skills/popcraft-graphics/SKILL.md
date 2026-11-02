@@ -23,7 +23,7 @@ Read the **popcraft** skill first (connecting, docs, which tools run where).
    - background, shapes and images (`createNode`, `createImage`, `setFills`);
    - text (`createNode` type `TEXT`, then `setText` and `setTypography`);
    - layout (`setAutoLayout`, `alignNodes`, `distributeNodes`).
-   Check the plugin API reference for each method's arguments.
+     Check the plugin API reference for each method's arguments.
 3. **Look before you export.** `getDocumentOutline` and `measureNodes` show structure and bounds; fix overflow, overlaps and anything outside the frame.
 4. **Export** with `ext__popcraft__export` (`format: "PNG"`, `scale: 2` for crisp output; SVG or PDF for print).
 5. **Report** the file URL and show the image. Offer variations (sizes, colorways) instead of guessing.

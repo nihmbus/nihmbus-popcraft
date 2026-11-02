@@ -11,22 +11,14 @@
   "engines": {
     "nihmbus": ">=1.3.0"
   },
-  "permissions": [
-    "device"
-  ],
+  "permissions": ["device"],
   "device": {
     "label": "PopCraft",
     "description": "Your PopCraft editor (popcraft.app or the desktop app) with the Nihmbus plugin running.",
     "pairingHint": "In PopCraft, install the Nihmbus plugin, open Plugins → Nihmbus → Connect, and enter the code. Keep the plugin running (its panel can be hidden).",
     "protocol": 1,
     "maxUploadBytes": 524288000,
-    "uploadContentTypes": [
-      "image/png",
-      "image/jpeg",
-      "image/webp",
-      "image/svg+xml",
-      "application/pdf"
-    ],
+    "uploadContentTypes": ["image/png", "image/jpeg", "image/webp", "image/svg+xml", "application/pdf"],
     "tools": [
       {
         "name": "status",
@@ -262,9 +254,7 @@
                     "maxItems": 8
                   }
                 },
-                "required": [
-                  "method"
-                ],
+                "required": ["method"],
                 "additionalProperties": false
               }
             }
@@ -286,13 +276,7 @@
             },
             "format": {
               "type": "string",
-              "enum": [
-                "PNG",
-                "JPG",
-                "WEBP",
-                "SVG",
-                "PDF"
-              ],
+              "enum": ["PNG", "JPG", "WEBP", "SVG", "PDF"],
               "default": "PNG"
             },
             "scale": {
@@ -307,9 +291,7 @@
               "description": "Without the extension; defaults to the layer's name."
             }
           },
-          "required": [
-            "nodeId"
-          ],
+          "required": ["nodeId"],
           "additionalProperties": false
         },
         "mutating": false,

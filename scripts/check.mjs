@@ -5,7 +5,10 @@ import { readFileSync, existsSync } from 'node:fs'
 import { join } from 'node:path'
 
 const root = new URL('..', import.meta.url).pathname
-const fail = (msg) => { console.error('✖ ' + msg); process.exitCode = 1 }
+const fail = (msg) => {
+  console.error('✖ ' + msg)
+  process.exitCode = 1
+}
 const m = JSON.parse(readFileSync(join(root, 'nihmbus.extension.json'), 'utf8'))
 
 if (!/^[a-z0-9][a-z0-9-]*$/.test(m.name)) fail('name must be lowercase alphanumerics + hyphens')
@@ -23,7 +26,10 @@ for (const t of tools) {
 const names = new Set()
 for (const { path } of m.skills ?? []) {
   const file = join(root, path, 'SKILL.md')
-  if (!existsSync(file)) { fail(`missing ${path}/SKILL.md`); continue }
+  if (!existsSync(file)) {
+    fail(`missing ${path}/SKILL.md`)
+    continue
+  }
   const fm = /^---\n([\s\S]*?)\n---\n/.exec(readFileSync(file, 'utf8'))?.[1] ?? ''
   const name = /^name:\s*(.+)$/m.exec(fm)?.[1]?.trim()
   const desc = /^description:\s*(.+)$/m.exec(fm)?.[1]?.trim()

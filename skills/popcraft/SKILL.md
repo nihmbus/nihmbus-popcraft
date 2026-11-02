@@ -12,12 +12,12 @@ triggers:
 
 # PopCraft
 
-PopCraft is a design, motion and video editor (https://popcraft.app, also a desktop app). There are two ways to drive it:
+PopCraft is a design, motion and video editor (<https://popcraft.app>, also a desktop app). There are two ways to drive it:
 
-| Where you run | How | What works |
-|---|---|---|
-| **A Nihmbus agent** | The device tools `ext__popcraft__status`, `ext__popcraft__call`, `ext__popcraft__export`, which run in the user's own PopCraft editor through the Nihmbus plugin | Building and editing designs and animations, still exports (PNG, JPG, WEBP, SVG, PDF) |
-| **An agent with a shell on the user's machine** (e.g. a coding agent) | The `popcraft` CLI | Everything, including MP4/GIF video export and templates |
+| Where you run                                                         | How                                                                                                                                                              | What works                                                                            |
+| --------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------- |
+| **A Nihmbus agent**                                                   | The device tools `ext__popcraft__status`, `ext__popcraft__call`, `ext__popcraft__export`, which run in the user's own PopCraft editor through the Nihmbus plugin | Building and editing designs and animations, still exports (PNG, JPG, WEBP, SVG, PDF) |
+| **An agent with a shell on the user's machine** (e.g. a coding agent) | The `popcraft` CLI                                                                                                                                               | Everything, including MP4/GIF video export and templates                              |
 
 ## 1. Read the latest docs first
 
@@ -33,8 +33,8 @@ If the docs disagree with a skill, the docs win.
 
 Call `ext__popcraft__status`. If it says no device is connected, tell the user exactly this:
 
-1. Open PopCraft — https://popcraft.app in a browser, or the desktop app — and sign in.
-2. Install the **Nihmbus** plugin: main menu → **Manage plugins…** → search "Nihmbus" → **Install** (or **Installed → Install from file…** with a release zip from https://github.com/getpopcraft/popcraft-plugin-nihmbus/releases).
+1. Open PopCraft — <https://popcraft.app> in a browser, or the desktop app — and sign in.
+2. Install the **Nihmbus** plugin: main menu → **Manage plugins…** → search "Nihmbus" → **Install** (or **Installed → Install from file…** with a release file from <https://github.com/getpopcraft/popcraft-plugin-nihmbus/releases>).
 3. Run it: **Plugins → Nihmbus → Connect**.
 4. In Nihmbus, open **Extensions → PopCraft → Connect PopCraft**, and type the code it shows into the plugin.
 5. Leave the plugin running. Hiding its panel is fine; closing it, or closing the PopCraft tab, disconnects it.
