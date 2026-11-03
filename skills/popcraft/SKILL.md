@@ -35,13 +35,14 @@ Call `ext__popcraft__status`. If it says no device is connected, tell the user e
 
 1. Open PopCraft — <https://popcraft.app> in a browser, or the desktop app — and sign in.
 2. Install the **Nihmbus** plugin: main menu → **Manage plugins…** → search "Nihmbus" → **Install** (or **Installed → Install from file…** with a release file from <https://github.com/getpopcraft/popcraft-plugin-nihmbus/releases>).
-3. Run it: **Plugins → Nihmbus → Connect**.
+3. Click the **Nihmbus** icon in PopCraft's right-hand rail (an outline while not connected).
 4. In Nihmbus, open **Extensions → PopCraft → Connect PopCraft**, and type the code it shows into the plugin.
-5. Leave the plugin running. Hiding its panel is fine; closing it, or closing the PopCraft tab, disconnects it.
+5. Done: the rail icon turns into the coloured Nihmbus mark. The plugin reconnects by itself whenever the user opens a
+   PopCraft file; closing the PopCraft tab or app disconnects it until the next file opens.
 
 Never ask the user for a token or password in chat. Devices belong to the user who connected them: you can only use your own user's PopCraft.
 
-If it was connected before and now shows offline: the PopCraft tab was closed, reloaded or put to sleep, or PopCraft quit. Ask the user to bring it back and run **Plugins → Nihmbus → Connect** again (no new code needed).
+If it was connected before and now shows offline: no PopCraft file is open, the tab was put to sleep, or PopCraft quit. Ask the user to open a PopCraft file (on older PopCraft builds, also click the Nihmbus rail icon); no new code is needed.
 
 ## 3. Using the device tools
 

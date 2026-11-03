@@ -15,7 +15,7 @@
   "device": {
     "label": "PopCraft",
     "description": "Your PopCraft editor (popcraft.app or the desktop app) with the Nihmbus plugin running.",
-    "pairingHint": "In PopCraft, install the Nihmbus plugin, open Plugins → Nihmbus → Connect, and enter the code. Keep the plugin running (its panel can be hidden).",
+    "pairingHint": "In PopCraft, install the Nihmbus plugin, click the Nihmbus icon in the right-hand rail, and enter the code. The icon turns into the coloured Nihmbus mark once connected.",
     "protocol": 1,
     "maxUploadBytes": 524288000,
     "uploadContentTypes": ["image/png", "image/jpeg", "image/webp", "image/svg+xml", "application/pdf"],

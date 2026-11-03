@@ -64,10 +64,11 @@ The tool contract is in [docs/tools.md](docs/tools.md).
    it. Or download the `.json` from the
    [plugin's releases](https://github.com/getpopcraft/popcraft-plugin-nihmbus/releases) and use **Installed → Install
    from file…**.
-3. **Connect them.** In Nihmbus, open **Extensions → PopCraft → Connect PopCraft** to get a code. In PopCraft, run
-   **Plugins → Nihmbus → Connect** and enter it.
+3. **Connect them.** In Nihmbus, open **Extensions → PopCraft → Connect PopCraft** to get a code. In PopCraft, click
+   the **Nihmbus** icon in the right-hand rail and enter it. The icon turns into the coloured Nihmbus mark once
+   connected.
 4. **Ask an agent for something**, like "make a 1080×1350 launch poster for our new feature". Keep the plugin running
-   while it works. Hiding its panel is fine; closing it, or the PopCraft tab, disconnects.
+   while it works. It reconnects by itself whenever you open a PopCraft file.
 
 ## Limitations
 
@@ -76,7 +77,7 @@ The tool contract is in [docs/tools.md](docs/tools.md).
   to you. Agents that have a shell on your machine can use the [PopCraft CLI](https://popcraft.app/docs/api/cli)
   instead.
 - **The plugin must be running.** A PopCraft tab that is closed, reloaded or frozen by the browser goes offline until
-  you run **Connect** again; no new code is needed.
+  you open a file again (on older PopCraft builds, click the rail icon); no new code is needed.
 
 ## Develop
 
