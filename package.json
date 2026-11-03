@@ -1,6 +1,6 @@
 {
   "name": "nihmbus-popcraft",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "private": true,
   "description": "PopCraft for Nihmbus: the extension manifest (device tools) and skills.",
   "license": "MIT",

@@ -2,7 +2,7 @@
   "manifestVersion": 1,
   "name": "popcraft",
   "displayName": "PopCraft",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "publisher": "nihmbus",
   "description": "Design graphics, motion and video in PopCraft from Nihmbus: agents work in your own PopCraft editor, on the web or the desktop app, through the Nihmbus plugin.",
   "homepage": "https://github.com/nihmbus/nihmbus-popcraft",
